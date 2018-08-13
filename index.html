@@ -19,19 +19,19 @@
             <section class="description">
                 <p>A place to store the things you have to do!</p>
             </section>
-            <input type="text" placeholder="Filter your to-dos">
+            <input type="text" placeholder="Filter your to-dos" ng-model="nameOfTask">
             <section class="toDoList">
                 <ol>
-                    <li ng-repeat="item in list.list track by $index" ng-class="{'completed': item.completed === true}">
-                        <button class="completeBtn" ng-if="item.completed === false">Complete</button>
+                    <li ng-repeat="item in list.list | filter: nameOfTask track by $index" ng-class="{'completed': item.completed === true}">
+                        <button class="completeBtn" ng-if="item.completed === false" ng-click="item.completed = true">Complete</button>
                         <span>{{ item.task }}</span>
-                        <i class="material-icons">clear</i>
+                        <i ng-click="list.removeTask($index)" class="material-icons">clear</i>
                     </li>
                 </ol>
             </section>
-            <form class="addToList">
-                <input type="text" placeholder="Add your to-do">
-                <button type="button" class="add">Add</button>
+            <form class="addToList" ng-submit="list.addTask({task: newItem, completed: false});">
+                <input type="text" placeholder="Add your to-do" ng-model="newItem">
+                <button type="submit" class="add">Add</button>
             </form>
         </section>
     </section>

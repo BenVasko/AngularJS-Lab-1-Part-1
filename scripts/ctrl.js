@@ -20,6 +20,13 @@ function TodoController() {
             completed: false
         }
     ];
+    vm.removeTask = (index) => {
+        vm.list.splice(index, 1);
+    };
+
+    vm.addTask = (newItem) => {
+        vm.list.push(angular.copy(newItem));
+    }
 }
 
 angular
